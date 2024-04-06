@@ -77,11 +77,9 @@ void run_case() {
 
     FOR(i, 1, cmp_index) {
         int temp = 0;
-
         FOR(j, i + 1, cmp_index) {
             temp += cnt[j];
         }
-
         res += cnt[i] * temp;
     }
 
