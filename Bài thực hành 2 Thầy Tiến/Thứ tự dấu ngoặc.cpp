@@ -22,41 +22,25 @@ using pii = pair<int, int>;
 const int MOD = 1e9 + 7;
 const int N = 1e5 + 5;
 
-int a[1005][1005];
-int vs[1005][1005];
-int n, m, res;
-
-void flood_fill(int i, int j, int cnt) {
-    if (i == n && j == m) {
-        res = min(res, cnt);
-        return;
-    }
-
-    if (i < 0 || i > n || j < 0 || j > m || vs[i][j] == 1)
-        return;
-
-    vs[i][j] = 1;
-
-    flood_fill(i + abs(a[i + 1][j] - a[i][j]), j, cnt + 1);
-    flood_fill(i, j + abs(a[i][j + 1] - a[i][j]), cnt + 1);
-    flood_fill(i + abs(a[i + 1][j + 1] - a[i][j]), j + abs(a[i + 1][j + 1] - a[i][j]), cnt + 1);
-}
-
 void run_case() {
-    memset(vs, 0, sizeof(vs));
+    string s;
+    getline(cin, s);
 
-    cin >> n >> m;
+    stack<int> st;
+    int stt = 1;
 
-    FOR(i, 1, n) {
-        FOR(j, 1, m) {
-            cin >> a[i][j];
+    for (char c : s) {
+        if (c == '(') {
+            st.push(stt);
+            cout << stt++ << ' ';
+        }
+        else if (c == ')') {
+            cout << st.top() << ' ';
+            st.pop();
         }
     }
 
-    res = 1e9;
-    flood_fill(1, 1, 0);
-
-    cout << (res != 1e9) ? res : -1 << endl;
+    cout << endl;
 }
 
 int main() {
@@ -68,6 +52,8 @@ int main() {
 
     int T = 1;
     cin >> T;
+
+    cin.ignore();
 
     for (int test = 1; test <= T; ++test) {
 
