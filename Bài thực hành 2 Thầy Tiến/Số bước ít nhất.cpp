@@ -32,7 +32,7 @@ void flood_fill(int i, int j, int cnt) {
         return;
     }
 
-    if (i < 0 || i > n || j < 0 || j > m || vs[i][j] == 1)
+    if (i < 1 || i > n || j < 1 || j > m || vs[i][j] == 1 || cnt >= res)
         return;
 
     vs[i][j] = 1;
@@ -40,11 +40,11 @@ void flood_fill(int i, int j, int cnt) {
     flood_fill(i + abs(a[i + 1][j] - a[i][j]), j, cnt + 1);
     flood_fill(i, j + abs(a[i][j + 1] - a[i][j]), cnt + 1);
     flood_fill(i + abs(a[i + 1][j + 1] - a[i][j]), j + abs(a[i + 1][j + 1] - a[i][j]), cnt + 1);
+
+    vs[i][j] = 0;
 }
 
 void run_case() {
-    memset(vs, 0, sizeof(vs));
-
     cin >> n >> m;
 
     FOR(i, 1, n) {
