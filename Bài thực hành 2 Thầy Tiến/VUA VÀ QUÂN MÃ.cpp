@@ -28,11 +28,11 @@ int king_vs[105][105], knight_vs[105][105];
 int king[105][105], knight[105][105];
 pii king_pos, knight_pos;
 
-int dx1[] = {0, 0, 1, -1, 1, -1, 1, -1};
-int dy1[] = {1, -1, 0, 0, 1, -1, -1, 1};
+int king_dx[] = {0, 0, 1, -1, 1, -1, 1, -1};
+int king_dy[] = {1, -1, 0, 0, 1, -1, -1, 1};
 
-int dx2[] = {-2, -1, 1, 2, 2, 1, -1, -2};
-int dy2[] = {-1, -2, -2, -1, 1, 2, 2, 1};
+int knight_dx[] = {-2, -1, 1, 2, 2, 1, -1, -2};
+int knight_dy[] = {-1, -2, -2, -1, 1, 2, 2, 1};
 
 void BFS_king(int x, int y) {
     queue<pii> q;
@@ -46,8 +46,8 @@ void BFS_king(int x, int y) {
         q.pop();
 
         FOR(i, 0, 7) {
-            int x1 = temp.fi + dx1[i];
-            int y1 = temp.se + dy1[i];
+            int x1 = temp.fi + king_dx[i];
+            int y1 = temp.se + king_dy[i];
 
             if (x1 >= 1 && x1 <= n && y1 >= 1 && y1 <= n && !king_vs[x1][y1]) {
                 king_vs[x1][y1] = 1;
@@ -73,8 +73,8 @@ void BFS_knight(int x, int y) {
             res = min(res, king[temp.fi][temp.se]);
 
         FOR(i, 0, 7) {
-            int x1 = temp.fi + dx2[i];
-            int y1 = temp.se + dy2[i];
+            int x1 = temp.fi + knight_dx[i];
+            int y1 = temp.se + knight_dy[i];
 
             if (x1 >= 1 && x1 <= n && y1 >= 1 && y1 <= n && !knight_vs[x1][y1]) {
                 knight_vs[x1][y1] = 1;
