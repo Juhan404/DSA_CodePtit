@@ -56,7 +56,10 @@ void run_case() {
     res = 1e9;
     flood_fill(1, 1, 0);
 
-    cout << (res != 1e9) ? res : -1 << endl;
+    if (res == 1e9)
+        cout << -1 << '\n';
+    else
+        cout << res << '\n';
 }
 
 int main() {
