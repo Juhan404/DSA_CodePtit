@@ -24,46 +24,29 @@ const int N = 1e5 + 5;
 
 vector<string> v;
 
-ll postfix_calc() {
-    stack<string> st;
-
-    for (auto &s : v) {
-        if (s == "+" || s == "-" || s == "*" || s == "/") {
-            ll b = stoll(st.top());
-            st.pop();
-
-            ll a = stoll(st.top());
-            st.pop();
-
-            if (s == "+")
-                st.push(to_string(a + b));
-            else if (s == "-")
-                st.push(to_string(a - b));
-            else if (s == "*")
-                st.push(to_string(a * b));
-            else if (s == "/")
-                st.push(to_string(a / b));
-        }
-        else {
-            st.push(s);
-        }
-    }
-
-    return stoll(st.top());
+string check() {
+    if (v.back() != "-" && v.back() != "+" && v.back() != "*" && v.back() != "/")
+        return "prefix";
+    else
+        return "postfix";
 }
 
-ll prefix_calc() {
-    reverse(v.begin(), v.end());
+ll calc(string type) {
+    if (type == "prefix")
+        reverse(v.begin(), v.end());
 
     stack<string> st;
 
     for (auto &s : v) {
         if (s == "+" || s == "-" || s == "*" || s == "/") {
+            ll b = stoll(st.top());
+            st.pop();
+
             ll a = stoll(st.top());
             st.pop();
 
-            ll b = stoll(st.top());
-            st.pop();
+            if (type == "prefix")
+                swap(a, b);
 
             if (s == "+")
                 st.push(to_string(a + b));
@@ -90,10 +73,7 @@ void run_case() {
     for (auto &s : v)
         cin >> s;
 
-    if (v.back() != "-" && v.back() != "+" && v.back() != "*" && v.back() != "/")
-        cout << prefix_calc() << endl;
-    else
-        cout << postfix_calc() << endl;
+    cout << calc(check()) << endl;
 }
 
 int main() {
