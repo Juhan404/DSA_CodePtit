@@ -36,10 +36,10 @@ void flood_fill(int i, int j, string path, int change) {
 
     a[i][j] = 0;
 
-    flood_fill(i + 1, j, path + "D", change + (path.back() != 'D' && sz(path) > 1));
-    flood_fill(i - 1, j, path + "U", change + (path.back() != 'U' && sz(path) > 1));
-    flood_fill(i, j + 1, path + "R", change + (path.back() != 'R' && sz(path) > 1));
-    flood_fill(i, j - 1, path + "L", change + (path.back() != 'L' && sz(path) > 1));
+    flood_fill(i + 1, j, path + "D", change + (sz(path) > 1 && path.back() != 'D'));
+    flood_fill(i - 1, j, path + "U", change + (sz(path) > 1 && path.back() != 'U'));
+    flood_fill(i, j + 1, path + "R", change + (sz(path) > 1 && path.back() != 'R'));
+    flood_fill(i, j - 1, path + "L", change + (sz(path) > 1 && path.back() != 'L'));
 }
 
 void run_case() {
